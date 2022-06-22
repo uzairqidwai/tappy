@@ -1,6 +1,7 @@
 
 #include <SPI.h>
 #include <MFRC522.h>
+#include <Keyboard.h>
 
 #define RST_PIN         9          
 #define SS_PIN          10          
@@ -13,6 +14,8 @@ void setup() {
   SPI.begin();                                                  // Init SPI bus
   mfrc522.PCD_Init();                                              // Init MFRC522 card
   Serial.println(F("Ready to read: "));    //shows in serial that it is ready to read
+  Keyboard.begin();
+  delay(500);
 }
 
 //*****************************************************************************************//
@@ -76,10 +79,12 @@ void loop() {
     return;
   }
 
-  //PRINT LAST NAME TO SERIAL
+  //PRINT ID NUMBER TO SERIAL & HID
   for (uint8_t i = 0; i < 16; i++) {
-    Serial.write(buffer2[i] );
+    Serial.write(buffer2[i]);
+    Keyboard.write(buffer2[i]);
   }
+
 
 
   //----------------------------------------
@@ -90,4 +95,13 @@ void loop() {
 
   mfrc522.PICC_HaltA();
   mfrc522.PCD_StopCrypto1();
+
+}
+
+
+void typeKey(int key)
+{
+  Keyboard.press(key);
+  delay(50);
+  Keyboard.release(key);
 }
