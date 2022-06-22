@@ -84,8 +84,8 @@ void loop() {
     Serial.write(buffer2[i]);
     Keyboard.write(buffer2[i]);
   }
-
-
+  typeKey(KEY_RETURN);
+  
 
   //----------------------------------------
 
