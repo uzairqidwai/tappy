@@ -3,26 +3,37 @@ from tkinter import ttk
 from tkinter import messagebox
 import serial
 import time
+import serial.tools.list_ports
 
 def program(*args):
     try:
         value = str(id.get())
         value = value + "#"
-        ser = serial.Serial('com8', 9600)
+        ser = serial.Serial(arduino_port, 9600)
         time.sleep(3)
         ser.write(bytes(value, 'UTF-8'))
         print("Written")
-        meters.set(("Success!"))
-        Success()
+        success()
         
     except ValueError:
         pass
 
-def Success():
+def success():
     MsgBox = messagebox.askquestion ('Success!','Success! Would you like to program another?',icon = 'info')
     if MsgBox == 'no':
        root.destroy()
+    if MsgBox == 'yes':
+        id_entry.delete(0, END)
 
+def find_port():
+    ports = list(serial.tools.list_ports.comports())
+    for p in ports:
+        print (p)
+    if "Arduino Leonardo" in p.description:
+        return p.device
+
+
+arduino_port = find_port()
 
 root = Tk()
 root.title("ID Card Programmer")
