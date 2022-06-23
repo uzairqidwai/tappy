@@ -4,6 +4,7 @@ from tkinter import messagebox
 import serial
 import time
 import serial.tools.list_ports
+from PIL import Image, ImageTk
 
 def program(*args):
     try:
@@ -33,11 +34,12 @@ def find_port():
         return p.device
 
 
+
 arduino_port = find_port()
 
 root = Tk()
-root.title("ID Card Programmer")
-
+root.title("ID Card Application")
+root.iconbitmap("C:/Users/Uzair Qidwai/Documents/GitHub/tappy/tappy_main/tappy_desktop_app/tappy_icon.ico")
 
 mainframe = ttk.Frame(root, padding="3 3 12 12")
 mainframe.grid(column=0, row=0, sticky=(N, W, E, S))
