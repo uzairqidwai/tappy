@@ -135,8 +135,6 @@ void read_card(){
 
 
 
-
-
 void write_card(){
 
     // Prepare key - all keys are set to FFFFFFFFFFFFh at chip delivery from the factory.

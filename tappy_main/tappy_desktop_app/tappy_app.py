@@ -6,34 +6,37 @@ import time
 import serial.tools.list_ports
 
 
-def program():
+def program(*args):
+    try:
         value = str(id.get())
         value = value + "#"
         ser = serial.Serial(arduino_port, 9600)
-        time.sleep(1)
         ser.write(bytes("W", 'UTF-8'))
         ser.write(bytes(value, 'UTF-8'))
         print("Written")
-        success()
-
+        written()
+        
+    except ValueError:
+        pass
 
 
 def read():
     ser = serial.Serial(arduino_port, 9600)
-    time.sleep(1)
     ser.write(bytes("R", 'UTF-8'))
     cc=str(ser.readline())
-    id = cc[2:][:-5]
-    print(id)
+    id_number = cc[2:][:-5]
+    print(id_number)
+    messagebox.showinfo("Card Read!", id_number)
 
 
-def success():
-    MsgBox = messagebox.askquestion ('Success!','Success! Would you like to program another?',icon = 'info')
+def written():
+    MsgBox = messagebox.askquestion ('Written!','Written! Would you like to continue?',icon = 'info')
     if MsgBox == 'no':
        root.destroy()
     if MsgBox == 'yes':
         id_entry.delete(0, END)
-
+    
+    
 def find_port():
     ports = list(serial.tools.list_ports.comports())
     for p in ports:
@@ -57,6 +60,7 @@ mainframe.grid(column=0, row=0, sticky=(N, W, E, S))
 root.columnconfigure(0, weight=1)
 root.rowconfigure(0, weight=1)
 
+id_number = str()
 id = StringVar()
 id_entry = ttk.Entry(mainframe, width=7, textvariable=id)
 id_entry.grid(column=2, row=1, sticky=(W, E))
