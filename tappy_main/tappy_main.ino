@@ -13,7 +13,7 @@ void setup() {
   Serial.begin(9600);                                           // Initialize serial communications with the PC
   SPI.begin();                                                  // Init SPI bus
   mfrc522.PCD_Init();                                              // Init MFRC522 card
-  Serial.println(F("Ready to read: "));    //shows in serial that it is ready to read
+  //Serial.println(F("Ready to read: "));    //shows in serial that it is ready to read
   Keyboard.begin();
   delay(500);
 }
@@ -42,17 +42,17 @@ void loop() {
     return;
   }
 
-  Serial.println(F("**Card Detected:**"));
+  //Serial.println(F("**Card Detected:**"));
 
   //-------------------------------------------
 
-  mfrc522.PICC_DumpDetailsToSerial(&(mfrc522.uid)); //dump some details about the card
+  //mfrc522.PICC_DumpDetailsToSerial(&(mfrc522.uid)); //dump some details about the card
 
   //mfrc522.PICC_DumpToSerial(&(mfrc522.uid));      //uncomment this to see all blocks in hex
 
   //-------------------------------------------
 
-  Serial.print(F("ID Number: "));
+  //Serial.print(F("ID Number: "));
 
   byte buffer1[18];
 
@@ -67,15 +67,15 @@ void loop() {
 
   status = mfrc522.PCD_Authenticate(MFRC522::PICC_CMD_MF_AUTH_KEY_A, 1, &key, &(mfrc522.uid)); //line 834
   if (status != MFRC522::STATUS_OK) {
-    Serial.print(F("Authentication failed: "));
-    Serial.println(mfrc522.GetStatusCodeName(status));
+    //Serial.print(F("Authentication failed: "));
+    //Serial.println(mfrc522.GetStatusCodeName(status));
     return;
   }
 
   status = mfrc522.MIFARE_Read(block, buffer2, &len);
   if (status != MFRC522::STATUS_OK) {
-    Serial.print(F("Reading failed: "));
-    Serial.println(mfrc522.GetStatusCodeName(status));
+    //Serial.print(F("Reading failed: "));
+    //Serial.println(mfrc522.GetStatusCodeName(status));
     return;
   }
 
@@ -89,7 +89,7 @@ void loop() {
 
   //----------------------------------------
 
-  Serial.println(F("\n**End Reading**\n"));
+  //Serial.println(F("\n**End Reading**\n"));
 
   delay(1000); //change value if you want to read cards faster
 
