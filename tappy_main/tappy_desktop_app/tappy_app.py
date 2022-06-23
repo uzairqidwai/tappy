@@ -4,7 +4,7 @@ from tkinter import messagebox
 import serial
 import time
 import serial.tools.list_ports
-from PIL import Image, ImageTk
+
 
 def program(*args):
     try:
