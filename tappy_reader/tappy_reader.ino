@@ -7,9 +7,11 @@
 #define SS_PIN          10          
 
 MFRC522 mfrc522(SS_PIN, RST_PIN);   // Create MFRC522 instance
+const int buzzer = 9;
 
 //*****************************************************************************************//
 void setup() {
+  pinMode(buzzer, OUTPUT);
   Serial.begin(9600);                                           // Initialize serial communications with the PC
   SPI.begin();                                                  // Init SPI bus
   mfrc522.PCD_Init();                                              // Init MFRC522 card
@@ -20,7 +22,7 @@ void setup() {
 
 //*****************************************************************************************//
 void loop() {
-
+  noTone(buzzer);
   // Prepare key - all keys are set to FFFFFFFFFFFFh at chip delivery from the factory.
   MFRC522::MIFARE_Key key;
   for (byte i = 0; i < 6; i++) key.keyByte[i] = 0xFF;
@@ -85,6 +87,10 @@ void loop() {
     Keyboard.write(buffer2[i]);
   }
   typeKey(KEY_RETURN);
+
+  tone(buzzer, 1000); // Send 1KHz sound signal...
+  delay(300);        // ...for 
+  noTone(buzzer);     // Stop sound...
   
 
   //----------------------------------------

@@ -28,9 +28,10 @@
 #define SS_PIN          10          // Configurable, see typical pin layout above
 
 MFRC522 mfrc522(SS_PIN, RST_PIN);   // Create MFRC522 instance
-
+const int buzzer = 9;
 
 void setup() {
+  pinMode(buzzer, OUTPUT);
   Serial.begin(9600);        // Initialize serial communications with the PC
   SPI.begin();               // Init SPI bus
   mfrc522.PCD_Init();        // Init MFRC522 card
@@ -44,6 +45,7 @@ void loop() {
 
 void Menu() {
     for (;;) {
+        noTone(buzzer);
         switch (Serial.read()) {
             case 'R': read_card(); break;
             case 'W': write_card(); break;
@@ -118,6 +120,9 @@ void read_card(){
     Serial.write(buffer2[i]);
   }
   Serial.write("\n");
+  tone(buzzer, 1000); // Send 1KHz sound signal...
+  delay(300);        // ...for 
+  noTone(buzzer);     // Stop sound...
 
   //----------------------------------------
 
@@ -208,6 +213,9 @@ void write_card(){
   }
   else {
     Serial.println(F("MIFARE_Write() success: "));
+    tone(buzzer, 1000); // Send 1KHz sound signal...
+    delay(300);        // ...for 
+    noTone(buzzer);     // Stop sound...
   }
 
   Serial.println(" ");
