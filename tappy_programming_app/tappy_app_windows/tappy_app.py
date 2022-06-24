@@ -53,6 +53,10 @@ arduino_port = find_port()                                  # Saves the COM port
 
 # GUI Design 
 
+import pyi_splash
+pyi_splash.close()
+
+
 root = Tk()
 root.title("tappy")
 #root.iconbitmap("C:/Users/Uzair Qidwai/Documents/GitHub/tappy/tappy_programming_app/tappy_icon.ico")
