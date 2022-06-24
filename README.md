@@ -76,19 +76,18 @@ If you want to debug the issue, download and run tappy_app_debug.exe. This will 
 
 ###### Parts for Device
 
-[Arduino Pro Micro](https://www.amazon.com/dp/B01MTU9GOB?psc=1&ref=ppx_yo2ov_dt_b_product_details)
+[Arduino Pro Micro](https://www.amazon.com/gp/product/B09TKMM8N5/ref=ppx_yo_dt_b_asin_title_o01_s00?ie=UTF8&psc=1)
 
-[RC522 RFID Reader](https://www.amazon.com/dp/B07VLDSYRW?psc=1&ref=ppx_yo2ov_dt_b_product_details)
+[RC522 RFID Reader](https://www.amazon.com/gp/product/B07QBPGYBF/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&psc=1)
 
-[Buzzer](https://uzairqidwai.com)
+[Buzzer](https://www.digikey.com/en/products/detail/tdk-corporation/PS1240P02CT3/2179628)
 
-[Micro C to Micro USB](https://uzairqidwai.com)
 
 <br>
 
 ###### Additional Parts
 
-[Mifare Classic 1k Cards](https://uzairqidwai.com)
+[Mifare Classic 1k Cards](https://www.amazon.com/gp/product/B09BD9V8NM/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&psc=1)
 
 [PCB](https://uzairqidwai.com)
 
