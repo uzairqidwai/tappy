@@ -1,51 +1,35 @@
 /*
- * Write personal data of a MIFARE RFID card using a RFID-RC522 reader
- * Uses MFRC522 - Library to use ARDUINO RFID MODULE KIT 13.56 MHZ WITH TAGS SPI W AND R BY COOQROBOT. 
+ * Write ID Number onto a MIFARE RFID card using a RFID-RC522 reader
  * -----------------------------------------------------------------------------------------
- *             MFRC522      Arduino       Arduino   Arduino    Arduino          Arduino
- *             Reader/PCD   Uno/101       Mega      Nano v3    Leonardo/Micro   Pro Micro
- * Signal      Pin          Pin           Pin       Pin        Pin              Pin
- * -----------------------------------------------------------------------------------------
- * RST/Reset   RST          9             5         D9         RESET/ICSP-5     RST
- * SPI SS      SDA(SS)      10            53        D10        10               10
- * SPI MOSI    MOSI         11 / ICSP-4   51        D11        ICSP-4           16
- * SPI MISO    MISO         12 / ICSP-1   50        D12        ICSP-1           14
- * SPI SCK     SCK          13 / ICSP-3   52        D13        ICSP-3           15
- *
- * More pin layouts for other boards can be found here: https://github.com/miguelbalboa/rfid#pin-layout
- *
- * Hardware required:
- * Arduino
- * PCD (Proximity Coupling Device): NXP MFRC522 Contactless Reader IC
- * PICC (Proximity Integrated Circuit Card): A card or tag using the ISO 14443A interface, eg Mifare or NTAG203.
- * The reader can be found on eBay for around 5 dollars. Search for "mf-rc522" on ebay.com. 
+ * Developed by Uzair Qidwai
  */
 
 #include <SPI.h>
 #include <MFRC522.h>
 
-#define RST_PIN         9           // Configurable, see typical pin layout above
-#define SS_PIN          10          // Configurable, see typical pin layout above
+#define RST_PIN         9           // Set RST Pin
+#define SS_PIN          10          // Set SS Pin 
 
 MFRC522 mfrc522(SS_PIN, RST_PIN);   // Create MFRC522 instance
-const int buzzer = 9;
+const int buzzer = 9;               // Set Buzzer pin
 
 void setup() {
-  pinMode(buzzer, OUTPUT);
+  pinMode(buzzer, OUTPUT);   // Set buzzer pin to output
   Serial.begin(9600);        // Initialize serial communications with the PC
   SPI.begin();               // Init SPI bus
   mfrc522.PCD_Init();        // Init MFRC522 card
-  //Serial.println(F("Write personal data on a MIFARE PICC "));
 }
+
+
 void loop() {
   Menu();
 }
 
 
-
+// Menu to put device in Read or Write mode
 void Menu() {
     for (;;) {
-        noTone(buzzer);
+        noTone(buzzer);                       
         switch (Serial.read()) {
             case 'R': read_card(); break;
             case 'W': write_card(); break;
@@ -54,19 +38,19 @@ void Menu() {
     }
 }
 
-void read_card(){
 
+// Function to read card
+void read_card(){
 
 // Prepare key - all keys are set to FFFFFFFFFFFFh at chip delivery from the factory.
   MFRC522::MIFARE_Key key;
   for (byte i = 0; i < 6; i++) key.keyByte[i] = 0xFF;
 
-  //some variables we need
+  // Setup variables we need
   byte block;
   byte len;
   MFRC522::StatusCode status;
 
-  //-------------------------------------------
 
   // Reset the loop if no new card present on the sensor/reader. This saves the entire process when idle.
   if ( ! mfrc522.PICC_IsNewCardPresent()) {
@@ -78,25 +62,11 @@ void read_card(){
     return;
   }
 
-  //Serial.println(F("**Card Detected:**"));
-
-  //-------------------------------------------
-
-  //mfrc522.PICC_DumpDetailsToSerial(&(mfrc522.uid)); //dump some details about the card
-
-  //mfrc522.PICC_DumpToSerial(&(mfrc522.uid));      //uncomment this to see all blocks in hex
-
-  //-------------------------------------------
-
-  //Serial.print(F("ID Number: "));
-
   byte buffer1[18];
-
   block = 4;
   len = 18;
-
-
-  //---------------------------------------- GET ID NUMBER
+  
+  // Get ID Number
 
   byte buffer2[18];
   block = 1;
@@ -115,20 +85,17 @@ void read_card(){
     return;
   }
 
-  //PRINT ID NUMBER TO SERIAL & HID
+  // Print ID Number to serial & enable buzzer
   for (uint8_t i = 0; i < 16; i++) {
     Serial.write(buffer2[i]);
   }
-  Serial.write("\n");
+  
+  Serial.write("\n"); //EOL 
   tone(buzzer, 1000); // Send 1KHz sound signal...
-  delay(300);        // ...for 
-  noTone(buzzer);     // Stop sound...
+  delay(300);      
+  noTone(buzzer);     // Stop sound
 
-  //----------------------------------------
-
-  //Serial.println(F("\n**End Reading**\n"));
-
-  delay(1000); //change value if you want to read cards faster
+  delay(1000); // Deley between readngs
 
   mfrc522.PICC_HaltA();
   mfrc522.PCD_StopCrypto1();
@@ -136,10 +103,7 @@ void read_card(){
 }
 
 
-
-
-
-
+// Write Card
 void write_card(){
 
     // Prepare key - all keys are set to FFFFFFFFFFFFh at chip delivery from the factory.
@@ -156,12 +120,12 @@ void write_card(){
     return;
   }
 
-  Serial.print(F("Card UID:"));    //Dump UID
+  Serial.print(F("Card UID:"));    //Print UID
   for (byte i = 0; i < mfrc522.uid.size; i++) {
     Serial.print(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " ");
     Serial.print(mfrc522.uid.uidByte[i], HEX);
   }
-  Serial.print(F(" PICC type: "));   // Dump PICC type
+  Serial.print(F(" PICC type: "));   // Print PICC type
   MFRC522::PICC_Type piccType = mfrc522.PICC_GetType(mfrc522.uid.sak);
   Serial.println(mfrc522.PICC_GetTypeName(piccType));
 
@@ -170,14 +134,15 @@ void write_card(){
   MFRC522::StatusCode status;
   byte len;
 
-  Serial.setTimeout(20000L) ;     // wait until 20 seconds for input from serial
+  Serial.setTimeout(20000L) ;     // Wait until 20 seconds for input from serial
+  
   // Ask ID Number
   Serial.println(F("Type ID Number, ending with #"));
-  len = Serial.readBytesUntil('#', (char *) buffer, 30) ; // read family name from serial
-  for (byte i = len; i < 30; i++) buffer[i] = ' ';     // pad with spaces
+  len = Serial.readBytesUntil('#', (char *) buffer, 30) ; // Read ID Number from serial
+  for (byte i = len; i < 30; i++) buffer[i] = ' ';     // Pad with spaces
 
   block = 1;
-  //Serial.println(F("Authenticating using key A..."));
+ 
   status = mfrc522.PCD_Authenticate(MFRC522::PICC_CMD_MF_AUTH_KEY_A, block, &key, &(mfrc522.uid));
   if (status != MFRC522::STATUS_OK) {
     Serial.print(F("PCD_Authenticate() failed: "));
@@ -196,7 +161,7 @@ void write_card(){
   else Serial.println(F("MIFARE_Write() success: "));
 
   block = 2;
-  //Serial.println(F("Authenticating using key A..."));
+
   status = mfrc522.PCD_Authenticate(MFRC522::PICC_CMD_MF_AUTH_KEY_A, block, &key, &(mfrc522.uid));
   if (status != MFRC522::STATUS_OK) {
     Serial.print(F("PCD_Authenticate() failed: "));

@@ -84,6 +84,7 @@ ttk.Separator(mainframe, orient='horizontal').grid(column=1, row=2, columnspan=3
 ttk.Button(mainframe, text="Read ID", command=read).grid(column=1, row=3, columnspan=3, sticky=W+E)
 
 
+
 for child in mainframe.winfo_children(): 
     child.grid_configure(padx=5, pady=5)
 
