@@ -15,7 +15,7 @@
 
 <p align="center">Read & Write to NFC/RFID Cards Elegantly! </p>
 <p align="center">
-Tappy provides a simple interface to read/write to Mifare Classic cards through a windows machine with a device built using an Arduino & RC522 reader. It also comes with a firmware to use the device in a "dumb" mode where it simply outputs whatever is read through the USB port (Emulates a HID)
+Tappy provides a simple interface to read/write to Mifare Classic cards through a windows machine with a device built using an Arduino & RC522 reader. It also comes with a firmware to use the device in a "dumb" mode where it simply outputs the data on the card through the USB port (Emulates a HID)
 </p>
 
 <br>
