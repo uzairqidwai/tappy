@@ -61,7 +61,7 @@ To use the tappy Windows app, ensure you have tappy_app.ino programmed on the de
 Plug the device into the computer and then run tappy_app.exe. Place the card on the reader and enter the data you want to write and press program. You should hear the buzzer when the card is programmed (leave the card on the reader while programming). 
 To read the card, place it on the reader and press the read button. The data on the card will be output.
 
-<b>YOU HAVE TO LIFT THE CARD OFF THE READER AND PUT IT BACK ON BETWEEN FUNCTIONS. IF YOU DO NOT DO THIS THE APP WILL CRASH AND YOU WILL HAVE TO DISCONNECT THE READER</b>
+<b>YOU HAVE TO LIFT THE CARD OFF THE READER AND PUT IT BACK ON BETWEEN FUNCTIONS (IE. READ OR WRITE). IF YOU DO NOT DO THIS THE APP WILL CRASH AND YOU WILL HAVE TO DISCONNECT THE READER</b>
 
 
 ###### Crashes
