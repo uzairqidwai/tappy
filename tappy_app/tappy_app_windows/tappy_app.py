@@ -9,7 +9,7 @@ def program(*args):
     try:
         value = str(id.get())                               # Get entered value
         value = value + "#"                                 # Append a # as EOL char
-        ser = serial.Serial(arduino_port, 9600)             # Connect to serial
+        ser = serial.Serial(arduino_port,baudrate = 9600, timeout=1)  # Connect to serial
         ser.write(bytes("W", 'UTF-8'))                      # Push 'W' over serial to indicate write mode
         ser.write(bytes(value, 'UTF-8'))                    # Push value to be written over serial
         print(value, " Written")                            # Print to console
@@ -29,7 +29,7 @@ def written():
 
 #Function to read an ID Card
 def read():
-    ser = serial.Serial(arduino_port, 9600)                 # Connect to serial
+    ser = serial.Serial(arduino_port,baudrate = 9600, timeout=1)  # Connect to serial
     ser.write(bytes("R", 'UTF-8'))                          # Push 'R' over serial to indicate read mode
     rr = str(ser.readline())                                # Read Value from serial till \n EOL
     id_number = rr [2:][:-5]                                # Remove surrounding characters & save
@@ -37,24 +37,39 @@ def read():
     id_message = ("ID Number: " + id_number)                # Message + Value to be printed
     messagebox.showinfo("Card Read!", id_message)           # Message Box showing value on card
 
+# Function to get ports
+def get_ports():
+    ports = serial.tools.list_ports.comports()
+    return ports
 
 #Function to find the COM port of the arduino
-def find_port():
-    ports = list(serial.tools.list_ports.comports())        # List all COM ports
-    for p in ports:
-        print (p)
-    if "Arduino Leonardo" in p.description:                 
-        return p.device                                     # Returns the COM port number
+def findArduino(portsFound):
+    commPort = 'None'
+    numConnection = len(portsFound)
+    
+    for i in range(0,numConnection):
+        port = foundPorts[i]
+        strPort = str(port)
+        
+        if 'Arduino' in strPort: 
+            splitPort = strPort.split(' ')
+            commPort = (splitPort[0])
 
+    if commPort == 'None':
+        messagebox.showerror ('Error','Connection Error! Please disconnect reader, restart the program, and then reconnect the reader.',icon = 'error')
+        root.destroy()
 
-arduino_port = find_port()                                  # Saves the COM port value in a var
+    return commPort  
+                                 
+foundPorts = get_ports()        
+arduino_port = findArduino(foundPorts)              
 
 #---------------------------------------------------------------------------------------------------------------------------------
 
 # GUI Design 
 
-import pyi_splash
-pyi_splash.close()
+#import pyi_splash
+#pyi_splash.close()
 
 
 root = Tk()
