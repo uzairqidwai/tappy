@@ -89,7 +89,7 @@ If you want to debug the issue, download and run tappy_app_debug.exe. This will 
 
 [Mifare Classic 1k Cards](https://www.amazon.com/gp/product/B09BD9V8NM/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&psc=1)
 
-[PCB](https://uzairqidwai.com)
+[PCB](https://github.com/uzairqidwai/tappy/raw/main/tappy_PCB_gerber.zip)
 
 <br>
 
@@ -100,6 +100,11 @@ If you want to debug the issue, download and run tappy_app_debug.exe. This will 
 <br>
 
 ###### PCB
+[Gerber Files](https://github.com/uzairqidwai/tappy/raw/main/tappy_PCB_gerber.zip)
+<p align="left"><img src="https://raw.githubusercontent.com/uzairqidwai/tappy/main/tappy_media/PCB_top.png" height="300" ></p>
+
+<p align="left"><img src="https://raw.githubusercontent.com/uzairqidwai/tappy/main/tappy_media/PCB_bottom.png" height="300" ></p>
+
 
 <br>
 
