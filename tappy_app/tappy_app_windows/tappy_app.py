@@ -68,8 +68,8 @@ arduino_port = findArduino(foundPorts)
 
 # GUI Design 
 
-#import pyi_splash
-#pyi_splash.close()
+import pyi_splash
+pyi_splash.close()
 
 
 root = Tk()
