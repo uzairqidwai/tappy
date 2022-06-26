@@ -15,7 +15,7 @@
 
 <p align="center">Read & Write to NFC/RFID Cards Elegantly! </p>
 <p align="center">
-Tappy provides a simple interface to read/write to Mifare Classic cards through a windows machine with a device built using an Arduino & RC522 reader. It also comes with a firmware to use the device in a "dumb" mode where it simply outputs whatever is read through the USB port (Emulates a HID)
+Tappy provides a simple interface to read/write to Mifare Classic cards through a windows machine with a device built using an Arduino & RC522 reader. It also comes with a firmware to use the device in a "dumb" mode where it simply outputs the data on the card through the USB port (Emulates a HID)
 </p>
 
 <br>
@@ -50,22 +50,62 @@ Download [tappy_app_debug.exe](https://github.com/uzairqidwai/tappy/raw/main/tap
 <br>
 
 <h2>Usage</h2>
-<p>ElegantOTA is a dead simple library which does your work in just 1 Line. Honestly, It's just a wrapper library which injects it's own elegant webpage instead of the ugly upload page which comes by default in Arduino Library.</p>
 
- Include ElegantOTA Library `#include <ElegantOTA.h>` at top of your Arduino Code.
+
+###### Arduino tappy Reader Sketch
+To use tappy in reader mode, ensure you have tappy_reader.ino programmed on the device. Once it is programmed, you should be able to tap any programmed NFC/RFID card on the reader and have the data output via USB. When plugged into a device (Android, Windows, etc.), the device is recognized as a keyboard and the data from the card is "typed" out. A buzzer will sound when the card is read.
+
+
+###### Windows tappy App
+To use the tappy Windows app, ensure you have tappy_app.ino programmed on the device, and tappy_app.exe downloaded. 
+Plug the device into the computer and then run tappy_app.exe. Place the card on the reader and enter the data you want to write and press program. You should hear the buzzer when the card is programmed (leave the card on the reader while programming). 
+To read the card, place it on the reader and press the read button. The data on the card will be output.
+
+<b>YOU HAVE TO LIFT THE CARD OFF THE READER AND PUT IT BACK ON BETWEEN FUNCTIONS (IE. READ OR WRITE). IF YOU DO NOT DO THIS, THE APP WILL CRASH AND YOU WILL HAVE TO RECONNECT THE READER</b>
+
+
+###### Crashes
+If the tappy app crashes, unplug the device, and close the app. Plug the device back in, and run the app again.
+
+If you want to debug the issue, download and run tappy_app_debug.exe. This will open the console and you can see the error that is thrown by the app.
  
- Paste this - `ElegantOTA.begin(&server);`  line above your `server.begin();`
+<br>
+<br>
+
+<h2>Device (Under Development)</h2>
+
+###### Parts for Device
+
+[Arduino Pro Micro](https://www.amazon.com/gp/product/B09TKMM8N5/ref=ppx_yo_dt_b_asin_title_o01_s00?ie=UTF8&psc=1)
+
+[RC522 RFID Reader](https://www.amazon.com/gp/product/B07QBPGYBF/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&psc=1)
+
+[Buzzer](https://www.digikey.com/en/products/detail/tdk-corporation/PS1240P02CT3/2179628)
+
+
+<br>
+
+###### Additional Parts
+
+[Mifare Classic 1k Cards](https://www.amazon.com/gp/product/B09BD9V8NM/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&psc=1)
+
+[PCB](https://uzairqidwai.com)
+
+<br>
+
+###### Schematic
+<p align="left"><img src="https://raw.githubusercontent.com/uzairqidwai/tappy/main/tappy_schematic.svg" height="400" ></p>
+
+
+<br>
+
+###### PCB
+
+<br>
+
+###### Case
  
- That's all!
-
-<hr/>
-
-Now copy the IPAddress displayed over your Serial Monitor and go to `http://<IPAddress>/update` in browser. ( where `<IPAddress>` is the IP of your ESP Module)
-
-<hr/>
-
-By default, ElegantOTA uses your chip id as a unique id for your esp chip on webpage. If you want to set a custom id, then you can set it via `ElegantOTA.setID("abcd123");`. Best to place it above `ElegantOTA.begin` function.
-
+ 
  
 <br>
 
@@ -74,7 +114,7 @@ By default, ElegantOTA uses your chip id as a unique id for your esp chip on web
 
 
 <h2>License</h2>
-ElegantOTA is licensed under The MIT License ( MIT ).
+tappy is licensed under The MIT License ( MIT ).
 <br/>
 <br/>
 <img src="https://img.shields.io/github/license/ayushsharma82/ElegantOTA.svg?style=for-the-badge" />
