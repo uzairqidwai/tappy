@@ -3,6 +3,16 @@ from tkinter import ttk
 from tkinter import messagebox
 import serial
 import serial.tools.list_ports
+import os
+from PIL import ImageTk, Image
+
+__author__ = 'Uzair Qidwai'
+__copyright__ = 'Copyright (C) 2022, Uzair Qidwai'
+__license__ = 'The MIT License (MIT)'
+__version__ = '1.0'
+__AppName__ = 'tappy'
+__client__ = 'MY Project USA'
+
 
 #Function to program an ID Card
 def program(*args):
@@ -60,7 +70,35 @@ def findArduino(portsFound):
         root.destroy()
 
     return commPort  
-                                 
+
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+
+
+def aboutScreen():
+    aboutWindow = Toplevel(root)
+    img = ImageTk.PhotoImage(Image.open(resource_path("C:/Users/Uzair Qidwai/Documents/GitHub/tappy/tappy_media/tappy_logo.png")))
+    panel = Label(aboutWindow, image = img)
+    panel.grid(column=10, row=0, sticky=(W, E))
+    #ttk.Label(aboutWindow, text="version 1.0").grid(column=10, row=1)
+    ttk.Label(aboutWindow, text=__AppName__ + " " + str(__version__)).grid(column=10, row=1)
+    ttk.Label(aboutWindow, text="Developed by " + __author__).grid(column=10, row=2)
+    ttk.Label(aboutWindow, text= __client__).grid(column=10, row=3)
+    ttk.Label(aboutWindow, text= " ").grid(column=10, row=4)
+    aboutWindow.mainloop()
+
+
+
+import pyi_splash
+pyi_splash.close()
+
 foundPorts = get_ports()        
 arduino_port = findArduino(foundPorts)              
 
@@ -68,13 +106,9 @@ arduino_port = findArduino(foundPorts)
 
 # GUI Design 
 
-import pyi_splash
-pyi_splash.close()
-
-
 root = Tk()
 root.title("tappy")
-#root.iconbitmap("C:/Users/Uzair Qidwai/Documents/GitHub/tappy/tappy_programming_app/tappy_icon.ico")
+root.iconbitmap(resource_path("C:/Users/Uzair Qidwai/Documents/GitHub/tappy/tappy_media/tappy_icon.ico"))
 
 mainframe = ttk.Frame(root, padding="12 12 12 12")
 mainframe.grid(column=0, row=0, sticky=(N, W, E, S))
@@ -106,5 +140,30 @@ for child in mainframe.winfo_children():
 id_entry.focus()
 root.bind("<Return>", program)
 
+# create a menubar
+menubar = Menu(root)
+root.config(menu=menubar)
+
+# create the file_menu
+file_menu = Menu(
+    menubar,
+    tearoff=0
+)
+
+# add menu items to the File menu
+file_menu.add_command(label='About', command=aboutScreen)
+file_menu.add_separator()
+
+# add Exit menu item
+file_menu.add_command(
+    label='Exit',
+    command=root.destroy
+)
+
+# add the File menu to the menubar
+menubar.add_cascade(
+    label="File",
+    menu=file_menu
+)
 
 root.mainloop()
