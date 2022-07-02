@@ -39,7 +39,7 @@ Upload this sketch to the Arduino using the Arduino or your prefered IDE
 
 ###### Windows tappy App
 
-For Windows: Download [tappy_app.exe](https://github.com/uzairqidwai/tappy/raw/main/tappy_app/tappy_app_windows/tappy_app.exe) and run. Be sure to plug in the reader before you run the software. (The arduino has to be programmed with tappy_app.ino for the desktop app to work)
+For Windows: First download the [Arduino IDE](https://www.arduino.cc/en/software) and install it. Then, download [tappy_app.exe](https://github.com/uzairqidwai/tappy/raw/main/tappy_app/tappy_app_windows/tappy_app.exe) and run it. Be sure to plug in the reader before you run the software. (The arduino has to be programmed with tappy_app.ino for the desktop app to work)
 
 
 ###### Debug Windows tappy App
