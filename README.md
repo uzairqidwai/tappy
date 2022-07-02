@@ -1,4 +1,4 @@
-<p align="center"><img src="https://raw.githubusercontent.com/uzairqidwai/tappy/main/tappy_media/tapy_logo.png" width="400"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/uzairqidwai/tappy/main/tappy_media/tappy_logo.png" width="400"></p>
 
 <hr/>
 <p align="center">
