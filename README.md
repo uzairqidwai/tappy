@@ -57,7 +57,7 @@ To use tappy in reader mode, ensure you have tappy_reader.ino programmed on the 
 
 
 ###### Windows tappy App
-To use the tappy Windows app, ensure you have tappy_app.ino programmed on the device, and tappy_app.exe downloaded. 
+To use the tappy Windows app, ensure you have tappy_app.ino programmed on the device, the Arduino IDE installed, and tappy_app.exe downloaded. 
 Plug the device into the computer and then run tappy_app.exe. Place the card on the reader and enter the data you want to write and press program. You should hear the buzzer when the card is programmed (leave the card on the reader while programming). 
 To read the card, place it on the reader and press the read button. The data on the card will be output.
 
