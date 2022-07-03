@@ -113,8 +113,8 @@ def versionCheck():
 
 
 
-#import pyi_splash
-#pyi_splash.close()
+import pyi_splash
+pyi_splash.close()
 
 foundPorts = get_ports()        
 arduino_port = findArduino(foundPorts)   
