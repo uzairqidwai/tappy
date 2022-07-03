@@ -5,11 +5,12 @@ import serial
 import serial.tools.list_ports
 import os
 from PIL import ImageTk, Image
+import requests
 
 __author__ = 'Uzair Qidwai'
 __copyright__ = 'Copyright (C) 2022, Uzair Qidwai'
 __license__ = 'The MIT License (MIT)'
-__version__ = '1.0'
+__version__ = 'v1.0.0-beta'
 __AppName__ = 'tappy'
 __client__ = 'MY Project USA'
 
@@ -96,12 +97,28 @@ def aboutScreen():
     aboutWindow.mainloop()
 
 
+def versionCheck():
+    response = requests.get("https://api.github.com/repos/uzairqidwai/tappy/releases/latest")
+    release = (response.json()["name"])
+    URL = "https://github.com/uzairqidwai/tappy/blob/" + release + "/tappy_app/tappy_app_windows/tappy_app.exe"
+    print(release)
+    if (release != __version__ and "beta" not in release):
+        MsgBox = messagebox.askquestion ('New Version!','tappy '+release+' is available now. Would you like to update?',icon = 'info')
+        if MsgBox == 'no':                                      
+            root.destroy()                                      
+        if MsgBox == 'yes':
+            response = requests.get(URL)
+            root.destroy()
+            
 
-import pyi_splash
-pyi_splash.close()
+
+
+#import pyi_splash
+#pyi_splash.close()
 
 foundPorts = get_ports()        
-arduino_port = findArduino(foundPorts)              
+arduino_port = findArduino(foundPorts)   
+versionCheck()           
 
 #---------------------------------------------------------------------------------------------------------------------------------
 
