@@ -84,7 +84,8 @@ def resource_path(relative_path):
 
 def aboutScreen():
     aboutWindow = Toplevel(root)
-    img = ImageTk.PhotoImage(Image.open(resource_path("C:/Users/Uzair Qidwai/Documents/GitHub/tappy/tappy_media/tappy_logo.png")))
+    aboutWindow.iconbitmap(resource_path("tappy_icon.ico"))
+    img = ImageTk.PhotoImage(Image.open(resource_path("tappy_logo_small.png")))
     panel = Label(aboutWindow, image = img)
     panel.grid(column=10, row=0, sticky=(W, E))
     #ttk.Label(aboutWindow, text="version 1.0").grid(column=10, row=1)
@@ -108,7 +109,7 @@ arduino_port = findArduino(foundPorts)
 
 root = Tk()
 root.title("tappy")
-root.iconbitmap(resource_path("C:/Users/Uzair Qidwai/Documents/GitHub/tappy/tappy_media/tappy_icon.ico"))
+root.iconbitmap(resource_path("tappy_icon.ico"))
 
 mainframe = ttk.Frame(root, padding="12 12 12 12")
 mainframe.grid(column=0, row=0, sticky=(N, W, E, S))
