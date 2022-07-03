@@ -10,7 +10,7 @@ import requests
 __author__ = 'Uzair Qidwai'
 __copyright__ = 'Copyright (C) 2022, Uzair Qidwai'
 __license__ = 'The MIT License (MIT)'
-__version__ = 'v1.0.0-beta'
+__version__ = 'v1.0.0'
 __AppName__ = 'tappy'
 __client__ = 'MY Project USA'
 
