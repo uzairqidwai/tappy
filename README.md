@@ -1,4 +1,4 @@
-<p align="center"><img src="https://raw.githubusercontent.com/uzairqidwai/tappy/main/tappy_media/tapy_logo.png" width="400"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/uzairqidwai/tappy/main/tappy_media/tappy_logo.png" width="400"></p>
 
 <hr/>
 <p align="center">
@@ -39,7 +39,7 @@ Upload this sketch to the Arduino using the Arduino or your prefered IDE
 
 ###### Windows tappy App
 
-For Windows: Download [tappy_app.exe](https://github.com/uzairqidwai/tappy/raw/main/tappy_app/tappy_app_windows/tappy_app.exe) and run. Be sure to plug in the reader before you run the software. (The arduino has to be programmed with tappy_app.ino for the desktop app to work)
+For Windows: First, download the [Arduino IDE](https://www.arduino.cc/en/software) and install it. Then, download [tappy_app.exe](https://github.com/uzairqidwai/tappy/raw/main/tappy_app/tappy_app_windows/tappy_app.exe) and run it. Be sure to plug in the reader before you run the software. (The arduino has to be programmed with tappy_app.ino for the desktop app to work)
 
 
 ###### Debug Windows tappy App
@@ -57,7 +57,7 @@ To use tappy in reader mode, ensure you have tappy_reader.ino programmed on the 
 
 
 ###### Windows tappy App
-To use the tappy Windows app, ensure you have tappy_app.ino programmed on the device, and tappy_app.exe downloaded. 
+To use the tappy Windows app, ensure you have tappy_app.ino programmed on the device, the Arduino IDE installed, and tappy_app.exe downloaded. 
 Plug the device into the computer and then run tappy_app.exe. Place the card on the reader and enter the data you want to write and press program. You should hear the buzzer when the card is programmed (leave the card on the reader while programming). 
 To read the card, place it on the reader and press the read button. The data on the card will be output.
 
