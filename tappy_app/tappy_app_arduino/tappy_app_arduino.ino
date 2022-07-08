@@ -91,7 +91,7 @@ void read_card(){
   }
   
   Serial.write("\n"); //EOL 
-  tone(buzzer, 1000); // Send 1KHz sound signal...
+  tone(buzzer, 700); // Send 1KHz sound signal...
   delay(300);      
   noTone(buzzer);     // Stop sound
 

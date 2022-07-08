@@ -26,6 +26,7 @@ void setup() {
 
 
 void loop() {
+  delay(200);
   noTone(buzzer);
   // Prepare key - all keys are set to FFFFFFFFFFFFh at chip delivery from the factory.
   MFRC522::MIFARE_Key key;
@@ -35,6 +36,8 @@ void loop() {
   byte block;
   byte len;
   MFRC522::StatusCode status;
+
+  mfrc522.PCD_StopCrypto1();
 
   // Reset the loop if no new card present on the sensor/reader. This saves the entire process when idle.
   if ( ! mfrc522.PICC_IsNewCardPresent()) {
@@ -76,15 +79,16 @@ void loop() {
   }
   typeKey(KEY_RETURN);
 
-  tone(buzzer, 1000); // Send 1KHz sound signal...
+  tone(buzzer, 700); // Send 700Hz sound signal...
   delay(300);        
   noTone(buzzer);     // Stop sound
   
 
-  delay(1000); //Delay between readings
-
   mfrc522.PICC_HaltA();
   mfrc522.PCD_StopCrypto1();
+
+
+  delay(1000); //Delay between readings
 
 }
 
@@ -92,5 +96,5 @@ void typeKey(int key)
 {
   Keyboard.press(key);
   delay(50);
-  Keyboard.release(key);
+  Keyboard.release(key);;
 }

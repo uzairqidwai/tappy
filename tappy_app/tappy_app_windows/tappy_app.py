@@ -10,7 +10,7 @@ import requests
 __author__ = 'Uzair Qidwai'
 __copyright__ = 'Copyright (C) 2022, Uzair Qidwai'
 __license__ = 'The MIT License (MIT)'
-__version__ = 'v1.0.0'
+__version__ = 'v1.0.0-beta'
 __AppName__ = 'tappy'
 __client__ = 'MY Project USA'
 
@@ -104,11 +104,12 @@ def versionCheck():
     print(release)
     if (release != __version__ and "beta" not in release):
         MsgBox = messagebox.askquestion ('New Version!','tappy '+release+' is available now. Would you like to update?',icon = 'info')
-        if MsgBox == 'no':                                      
-            root.destroy()                                      
+
         if MsgBox == 'yes':
+            print ("Going to download")
             response = requests.get(URL)
-            root.destroy()
+            print ("Done Downloading")
+            
             
 
 
@@ -118,15 +119,16 @@ pyi_splash.close()
 
 foundPorts = get_ports()        
 arduino_port = findArduino(foundPorts)   
-versionCheck()           
+         
 
 #---------------------------------------------------------------------------------------------------------------------------------
 
 # GUI Design 
 
-root = Tk()
+root = Tk()  
 root.title("tappy")
 root.iconbitmap(resource_path("tappy_icon.ico"))
+versionCheck()
 
 mainframe = ttk.Frame(root, padding="12 12 12 12")
 mainframe.grid(column=0, row=0, sticky=(N, W, E, S))
