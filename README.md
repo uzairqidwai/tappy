@@ -124,5 +124,3 @@ tappy is licensed under The MIT License ( MIT ).
 <br/>
 <img src="https://img.shields.io/github/license/ayushsharma82/ElegantOTA.svg?style=for-the-badge" />
 </div>
-
-test
